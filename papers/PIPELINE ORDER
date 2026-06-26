@@ -1,0 +1,8 @@
+ Omricon Processing Pipeline (Correct Order)
+
+1. VORIN — Interpretation Engine
+2. SERA — Structure Engine
+3. AERION — Abstraction Engine
+4. Core — Ω‑Core / State Machine
+5. CRVE — Cross‑Reference Verification Engine
+6. Governor Papers — Behavioural Shell (4 papers)
