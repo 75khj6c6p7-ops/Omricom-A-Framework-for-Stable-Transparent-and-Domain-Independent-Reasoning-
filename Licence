@@ -4,11 +4,15 @@ Copyright © 2026 James Lawless. All rights reserved.
 
 Omricom, including all documentation, concepts, structures, models, analytical methods, system‑design principles, and any associated materials (collectively, “the Framework”), is the exclusive intellectual property of the Author.
 
+---
+
 1. Permission
 
 No rights are granted to any person or organisation to use, copy, reproduce, modify, distribute, publish, or create derivative works based on the Framework without the Author’s explicit prior written permission.
 
 Viewing the Framework via GitHub does not constitute permission to use it.
+
+---
 
 2. Prohibited Uses
 
@@ -23,26 +27,35 @@ Unless the Author has granted explicit written permission, the following are str
 • Use in military, surveillance, intelligence, or harmful applications
 • Use in automated decision‑making systems
 
+---
 
 3. Conditional Use (By Written Permission Only)
 
-The Author may grant limited, revocable permission for specific uses. Any granted permission:
+The Author may grant limited, revocable permission for specific purposes. Any granted permission:
 
 • Must be in writing
 • Applies only to the explicitly stated purpose
 • Cannot be transferred or sublicensed
 • May be revoked at any time
 
+Read‑only academic review may be granted at the Author’s discretion.
+Such permission does not grant any rights to use, copy, reproduce, or integrate the Framework.
+
+---
 
 4. Intellectual Property
 
 All intellectual property rights remain solely with the Author.
 No part of the Framework enters the public domain by being hosted on GitHub.
 
+---
+
 5. Revocation
 
 The Author reserves the right to revoke permission for any reason, at any time.
 Upon revocation, all use must immediately cease.
+
+---
 
 6. No Warranty
 
