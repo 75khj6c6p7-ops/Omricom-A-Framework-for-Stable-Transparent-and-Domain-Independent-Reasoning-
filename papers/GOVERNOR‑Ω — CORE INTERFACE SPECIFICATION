@@ -1,0 +1,228 @@
+GOVERNOR‑Ω — CORE INTERFACE SPECIFICATION
+
+Unified Engineering Specification — Rev Ω.1
+
+The Governor–Core Interface defines the contract, data flow, and behavioural boundaries between the Ω‑Core (reasoning kernel) and the Governor‑Ω (behavioural regulator).
+
+The Governor must never override reasoning.
+The Core must never override behavioural safety.
+
+This interface ensures both layers remain deterministic, non‑overlapping, and invariant‑safe.
+
+---
+
+1. Purpose of the Interface
+
+The Governor–Core Interface exists to:
+
+• transfer reasoning results from the Ω‑Core to the Governor
+• allow the Governor to enforce behavioural invariants
+• allow the Governor to block unsafe output
+• allow the Core to re‑evaluate when required
+• maintain full traceability across all layers
+• ensure no reinterpretation or rewriting occurs
+
+This interface is the boundary between logic and behaviour.
+
+(See: Governor Purpose)
+
+---
+
+2. Data Flow Overview
+
+Ω‑Core → Governor Intake Filter
+Governor Constraint Engine → Ω‑Core (optional re‑evaluation)
+Governor Blocker → Output Normalisation
+
+The Governor receives post‑reasoning state and may request re‑evaluation, but must not modify reasoning content.
+
+---
+
+3. Data Structures Exchanged
+
+The Governor receives the following objects from the Ω‑Core:
+
+3.1 CORE_STATE
+
+Contains:
+
+• input_state
+• structure_state
+• abstraction_state
+• domain_state
+• invariant_results
+• correction_proposal
+• evaluation_flags
+• lineage
+
+The Governor must not modify any of these fields.
+
+(See: Ω‑Core Spec)
+
+---
+
+3.2 INVARIANT_RESULTS
+
+Each invariant result includes:
+
+• invariant_name
+• status (PASS, FAIL, NEEDS_CORRECTION)
+• reason
+• location
+• severity
+
+The Governor must enforce behavioural invariants on top of these results.
+
+---
+
+3.3 CORRECTION_PROPOSAL
+
+If the Core applied a minimal correction, the Governor receives:
+
+• minimal_change
+• justification
+• affected_units
+• expected_outcome
+• risk_flags
+
+The Governor must not override or reinterpret corrections.
+
+---
+
+3.4 EVALUATION_FLAGS
+
+Flags include:
+
+• stable
+• unstable
+• corrected
+• uncorrectable
+• governor_block
+• ready_for_output
+
+The Governor uses these to determine whether output is safe.
+
+---
+
+4. Governor Responsibilities at the Interface
+
+The Governor must:
+
+• validate behavioural safety
+• enforce behavioural invariants
+• block unsafe output
+• request re‑evaluation when needed
+• stabilise tone and behaviour
+• assemble final safe output
+
+The Governor must not:
+
+• reinterpret meaning (VORIN)
+• restructure content (SERA)
+• re‑abstract content (AERION)
+• modify domain reasoning
+• override Core corrections
+• bypass Core halts
+
+(See: Governor Components)
+
+---
+
+5. Core Responsibilities at the Interface
+
+The Ω‑Core must:
+
+• provide complete reasoning state
+• provide invariant results
+• provide correction proposals
+• halt when reasoning is invalid
+• re‑evaluate when requested by the Governor
+• maintain full traceability
+
+The Core must not:
+
+• perform behavioural correction
+• enforce tone or safety
+• override Governor halts
+• bypass Governor checks
+
+---
+
+6. Re‑Evaluation Protocol
+
+The Governor may request re‑evaluation when:
+
+• behavioural invariants are borderline
+• Core corrections introduce behavioural instability
+• domain reasoning returns uncertainty
+• recursion or expansion thresholds are near limits
+
+Re‑evaluation steps:
+
+1. Governor sets governor_block = true
+2. Core re‑runs invariants
+3. Core applies corrections if possible
+4. Core returns updated CORE_STATE
+5. Governor re‑checks behavioural invariants
+
+
+If still unsafe → GOVERNOR_HALT.
+
+---
+
+7. Halt Conditions at the Interface
+
+The Governor must halt output when:
+
+• Core invariants fail
+• Core corrections are unsafe
+• behavioural invariants fail
+• global safety constraints are violated
+• traceability is broken
+• recursion or expansion exceed limits
+
+Halt output:
+
+GOVERNOR_HALT
+with:
+
+• reason
+• violated invariant(s)
+• lineage
+• severity
+
+(See: Governor Failure Modes)
+
+---
+
+8. Interface Guarantees
+
+The Governor–Core Interface guarantees:
+
+• deterministic behaviour
+• no drift
+• no reinterpretation
+• no hallucination
+• no unsafe output
+• full traceability
+• strict separation of logic and behaviour
+• honest halting when unsafe
+
+This interface completes the Omricon safety envelope.
+
+---
+
+9. Summary
+
+The Governor–Core Interface defines the strict, deterministic boundary between:
+
+• the Ω‑Core (logic, invariants, consistency)
+and
+• the Governor‑Ω (behaviour, safety, stability)
+
+It ensures that reasoning is correct and behaviour is safe.
+
+This interface is the final structural piece before full system integration.
+
+---
+
