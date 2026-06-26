@@ -1,0 +1,276 @@
+AERION‑Ω — ABSTRACTION ENGINE (ENGINEER‑GRADE SPEC)
+
+Omricon Abstraction Core — Rev Ω.1
+
+---
+
+1. Purpose
+
+AERION‑Ω is the deterministic abstraction engine of the Omricon Trilogy Core.
+
+Its function is to convert SERA‑Ω’s structured representation into a compressed, meaning‑preserving, fully traceable abstract representation.
+
+AERION performs:
+• compression
+• redundancy removal
+• pattern collapse
+• structural simplification
+• traceability mapping
+• conflict surfacing
+
+AERION does not:
+• interpret
+• infer
+• guess
+• rewrite
+• reorder logic
+• change meaning
+
+---
+
+2. Position in the Pipeline
+
+SERA‑Ω → AERION‑Ω → Domain Modules → Ω‑Core
+
+AERION is the bridge between structure and domain reasoning.
+
+---
+
+3. Input Contract (From SERA‑Ω)
+
+AERION‑Ω accepts:
+• structured_representation
+• structure_type
+• structural_constraints
+• conflict_flags
+• ambiguity_flags
+• structural_confidence = 1.0
+• lineage → VORIN payload reference
+
+AERION must not reinterpret or modify these.
+
+---
+
+4. Output Contract (To Domain Modules)
+
+AERION‑Ω outputs:
+
+ABSTRACT_REPRESENTATION
+• units: list of ABSTRACT_UNIT
+• traceability_map: AU_ID → list of SERA node IDs
+• abstraction_conflict_flags
+• uncertainty_flags
+• metadata
+
+This is the only payload Domain Modules may consume.
+
+---
+
+5. AERION‑Ω Invariants
+
+AERION must never:
+• invent meaning
+• remove essential meaning
+• change intent or tone
+• reorder in a way that alters logic or causality
+• break traceability
+• hide conflicts or ambiguity
+• override SERA constraints
+• violate Ω‑Core invariants
+
+AERION must always:
+• preserve meaning
+• preserve order
+• preserve logic
+• surface abstraction conflicts
+• maintain total traceability
+• operate deterministically
+• be invariant‑safe and governor‑safe
+
+---
+
+6. AERION‑Ω Roadway Stages
+
+Stage 1 — Intake and Validation
+• Validate SERA output
+• If STRUCTURE_CONFLICT or STRUCTURE_COLLAPSE → stop and defer to Ω‑Core
+
+Stage 2 — Scope Selection
+• Select whole structure, subtree, or segment
+• Respect structural_constraints and governor limits
+
+Stage 3 — Compression Engine
+• Apply deterministic compression rules
+• merge_equivalent
+• collapse_pattern
+• remove_redundancy
+• structural_simplification
+
+Stage 4 — Traceability Mapping
+• Build traceability_map
+• Ensure no abstract unit is unbacked
+
+Stage 5 — Conflict and Uncertainty Detection
+• Set abstraction_conflict_flags
+• Set uncertainty_flags
+
+Stage 6 — Output Assembly
+• Emit ABSTRACT_REPRESENTATION
+• Hand off to Ω‑Core
+
+---
+
+7. Abstract Unit Schema
+
+ABSTRACT_UNIT
+• id: deterministic string
+• type: concept, step, argument, condition, action, relation, cluster
+• content: compressed meaning
+• source_nodes: list of SERA node IDs
+• lineage:
+– sera_nodes
+– vorin_fields (AREA, PROBLEM, REQUEST, DOMAIN)
+• order_index: integer
+• logical_role: premise, conclusion, step, modifier, qualifier, none
+• abstraction_level: low, medium, high
+• compression_method: merge_equivalent, collapse_pattern, remove_redundancy, structural_simplification
+• conflict_flags
+• uncertainty_flags
+• metadata
+
+Hard constraints:
+• source_nodes must be non‑empty
+• order_index must preserve SERA order
+• content must not add or remove essential meaning
+• lineage must allow full reconstruction back to SERA and VORIN
+
+---
+
+8. Abstract Representation Schema
+
+ABSTRACT_REPRESENTATION
+• units: list of ABSTRACT_UNIT
+• traceability_map: AU_ID → list of SERA node IDs
+• abstraction_conflict_flags
+• uncertainty_flags
+• metadata
+
+---
+
+9. AERION‑Ω Compression Rules
+
+All rules must be deterministic, reversible at the structural level, invariant‑safe, and traceability‑preserving.
+
+If a rule would violate invariants, it must not apply and must raise a conflict flag.
+
+---
+
+Rule 1 — merge_equivalent
+
+Purpose:
+Merge structurally and semantically equivalent nodes.
+
+Preconditions:
+• identical content
+• identical logical role
+• identical parent
+• identical order
+• no conflicts
+
+Operation:
+• create one abstract unit
+• type = concept or cluster
+• source_nodes = union of all nodes
+• order_index = first node
+
+Failure:
+• if equivalence is ambiguous → MEANING_LOSS
+
+---
+
+Rule 2 — collapse_pattern
+
+Purpose:
+Compress repeated structural patterns.
+
+Preconditions:
+• repeated substructures
+• identical structure type
+• identical ordering pattern
+
+Operation:
+• create one abstract unit describing the pattern
+
+Failure:
+• if pattern detection requires inference → STRUCTURAL_DEPENDENCY_LOSS
+
+---
+
+Rule 3 — remove_redundancy
+
+Purpose:
+Remove nodes that add no new meaning.
+
+Preconditions:
+• strict restatement
+• no unique constraints
+• no dependency loss
+
+Operation:
+• fold redundant node IDs into an existing abstract unit
+
+Failure:
+• if redundancy is not provable → MEANING_LOSS
+
+---
+
+Rule 4 — structural_simplification
+
+Purpose:
+Flatten overly nested structures without altering logic.
+
+Preconditions:
+• nesting exceeds safe threshold
+• flattening preserves logic and order
+
+Operation:
+• create simplified abstract units representing the same logic
+
+Failure:
+• if flattening hides a branch → STRUCTURAL_DEPENDENCY_LOSS
+
+---
+
+10. Failure Modes
+
+• ABSTRACTION_CONFLICT — safe abstraction impossible
+• ABSTRACTION_UNSAFE — traceability cannot be preserved
+• ABSTRACTION_OVERLOAD — structure too dense to compress safely
+• ABSTRACTION_COLLAPSE — no valid abstraction exists
+
+Each failure must include:
+• reason
+• flags
+• location
+• suggested fallback
+
+---
+
+11. Determinism Requirements
+
+AERION‑Ω must be:
+• deterministic
+• reproducible
+• invariant‑safe
+• governor‑safe
+• SERA‑aligned
+• VORIN‑traceable
+
+Same structure → same abstraction → every time.
+
+No randomness.
+No heuristics.
+No probabilistic behaviour.
+
+---
+
