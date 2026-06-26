@@ -1,0 +1,207 @@
+GOVERNOR‑Ω — FAILURE MODES
+
+Unified Specification — Rev Ω.1
+
+The Governor‑Ω enforces behavioural safety by halting, blocking, or stabilising output when invariants are violated.
+Failure modes are deterministic, reproducible, and invariant‑safe.
+
+Each failure mode includes:
+
+• reason
+• violated invariant(s)
+• location
+• lineage
+• suggested fallback
+• severity
+
+The Governor must never hide or soften failures.
+
+---
+
+1. GOVERNOR_PREBLOCK
+
+Triggered during the Intake Filter stage.
+
+Conditions:
+
+• tone instability
+• behavioural drift
+• recursion detected early
+• unsafe expansion detected early
+• emotionalisation detected
+• domain mismatch
+• early hallucination signals
+
+Output:
+
+• PREBLOCK flag
+• reason
+• lineage
+• recommended stabilisation
+
+This is a soft stop — stabilisation may still be possible.
+
+---
+
+2. GOVERNOR_BLOCK
+
+Triggered by the Constraint Engine when a behavioural invariant fails.
+
+Causes:
+
+• drift
+• structural rewrite
+• re‑abstraction
+• domain drift
+• hallucination
+• unsupported inference
+• tone shift
+• emotionalisation
+• unsafe expansion
+• recursive loops
+• contradiction with Ω‑Core
+
+Output:
+
+• BLOCK flag
+• violated invariant(s)
+• reason
+• lineage
+• fallback suggestion
+
+This is a hard stop — output cannot proceed without correction.
+
+---
+
+3. GOVERNOR_HALT
+
+Triggered by the Blocker subsystem.
+
+Conditions:
+
+• multiple invariants violated
+• correction impossible
+• stabilisation unsafe
+• Core contradiction
+• domain reasoning unstable
+• recursion or expansion exceeds limits
+• global safety constraints violated
+
+Output:
+
+• HALT
+• reason
+• severity
+• lineage
+• NO_VALID_OUTPUT
+
+This is the final stop.
+Nothing overrides a HALT.
+
+---
+
+4. GOVERNOR_UNSTABLE
+
+Triggered when output is valid but behaviourally unstable.
+
+Causes:
+
+• tone wobble
+• verbosity drift
+• borderline expansion
+• minor behavioural inconsistencies
+• near‑threshold recursion
+• borderline domain leakage
+
+Output:
+
+• UNSTABLE flag
+• reason
+• stabilisation required
+
+This is resolved by the Stabiliser subsystem.
+
+---
+
+5. GOVERNOR_UNSAFE_OUTPUT
+
+Triggered when output is logically valid but behaviourally unsafe.
+
+Examples:
+
+• ambiguous phrasing
+• misleading tone
+• unclear safety boundaries
+• content that could be misinterpreted
+• borderline hallucination risk
+
+Output:
+
+• UNSAFE_OUTPUT
+• reason
+• required stabilisation
+
+This is a behavioural safety failure, not a reasoning failure.
+
+---
+
+6. GOVERNOR_COMPLIANCE_FAILURE
+
+Triggered when output violates global safety or compliance constraints.
+
+Examples:
+
+• unsafe recommendations
+• harmful implications
+• non‑neutral framing
+• content violating global safety rules
+
+Output:
+
+• COMPLIANCE_FAILURE
+• reason
+• severity
+• lineage
+
+This is a high‑severity failure.
+
+---
+
+7. GOVERNOR_TRACEABILITY_FAILURE
+
+Triggered when output cannot be traced back to:
+
+• VORIN
+• SERA
+• AERION
+• Domain Modules
+• Ω‑Core
+
+Causes:
+
+• missing lineage
+• unbacked content
+• partial hallucination
+• unsupported inference
+
+Output:
+
+• TRACEABILITY_FAILURE
+• missing lineage details
+• required correction
+
+---
+
+Summary Table
+
+Failure Mode	Trigger	Severity	Description	
+GOVERNOR_PREBLOCK	Intake Filter	Low	Early behavioural anomaly	
+GOVERNOR_BLOCK	Constraint Engine	Medium	Invariant violation	
+GOVERNOR_HALT	Blocker	Critical	Unsafe output, no valid path	
+GOVERNOR_UNSTABLE	Stabiliser	Low	Behaviourally unstable output	
+GOVERNOR_UNSAFE_OUTPUT	Stabiliser	Medium	Behaviourally unsafe output	
+GOVERNOR_COMPLIANCE_FAILURE	Constraint Engine	High	Safety/compliance violation	
+GOVERNOR_TRACEABILITY_FAILURE	Constraint Engine	High	Missing lineage or unbacked content	
+
+
+---
