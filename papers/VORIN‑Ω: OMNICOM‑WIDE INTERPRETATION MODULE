@@ -1,0 +1,327 @@
+VORIN‑Ω: OMNICOM‑WIDE INTERPRETATION MODULE
+
+Unified Interpretation Layer for All Omricon Levels (O1 → O‑Core)
+
+Engineering Specification — Full Technical Document
+
+---
+
+1. Introduction
+
+VORIN‑Ω is the universal interpretation module for the Omricon architecture.
+Its purpose is to convert structured human input into deterministic internal representations that can be consumed by all Omricon reasoning layers.
+
+The system replaces natural‑language parsing with a strict four‑field schema:
+
+AREA
+PROBLEM
+REQUEST
+DOMAIN
+
+This schema ensures that all Omricon modules receive consistent, unambiguous, machine‑processable input.
+
+VORIN‑Ω is designed to be:
+
+• deterministic
+• domain‑agnostic
+• low‑complexity
+• failure‑predictable
+• cross‑compatible with all O‑levels
+
+---
+
+2. Problem Statement
+
+Natural language input introduces ambiguity, drift, and inconsistent interpretation.
+Earlier versions of Omricon relied on linguistic parsing, which caused:
+
+• misinterpretation of intent
+• domain confusion
+• contradictory reasoning
+• unstable outputs
+• high failure rates
+• unpredictable behaviour across modules
+
+A deterministic system requires deterministic input.
+
+VORIN‑Ω solves this by enforcing a structured input format that removes ambiguity at the source.
+
+---
+
+3. Design Goals
+
+1. Zero ambiguity in interpretation
+2. Zero reliance on NLP
+3. Deterministic mapping from input to internal structures
+4. Compatibility across all Omricon layers
+5. Minimal implementation complexity
+6. Predictable failure modes
+7. Human‑friendly but machine‑strict
+8. Extensible without breaking existing systems
+
+
+---
+
+4. Input Schema Specification
+
+VORIN‑Ω accepts exactly four fields:
+
+AREA: 
+PROBLEM: 
+REQUEST: 
+DOMAIN: 
+
+DOMAIN is optional but recommended.
+
+4.1 Field Definitions
+
+AREA
+Defines the physical, conceptual, or logical location of the issue.
+
+PROBLEM
+Describes the explicit issue or state requiring attention.
+
+REQUEST
+Defines the action the user wants Omricon to perform.
+
+DOMAIN
+Specifies the operational domain for routing and validation.
+
+4.2 Field Constraints
+
+AREA: 1 to 80 characters
+PROBLEM: 1 to 200 characters
+REQUEST: 1 to 200 characters
+DOMAIN: 1 to 40 characters
+Encoding: UTF‑8
+Invalid characters: { } [ ] < > |
+
+---
+
+5. System Architecture
+
+VORIN‑Ω consists of five deterministic stages:
+
+1. Field Validator
+2. Semantic Mapper
+3. Compatibility Checker
+4. Payload Assembler
+5. Cross‑Level Normalisation
+
+
+Each stage is mandatory and failure‑blocking.
+
+---
+
+6. Stage Descriptions
+
+6.1 Field Validator
+
+Purpose: Ensure the input conforms to the schema.
+
+Checks performed:
+
+• all required fields present
+• fields non‑empty
+• valid characters
+• correct ordering
+• no duplicate fields
+• no malformed prefixes
+
+Failure conditions:
+
+• missing field
+• empty field
+• invalid characters
+• schema mismatch
+
+Output: validated field set.
+
+---
+
+6.2 Semantic Mapper
+
+Purpose: Convert validated fields into internal Omricon units.
+
+Mappings:
+
+AREA → context_unit
+PROBLEM → meaning_unit
+REQUEST → action_unit
+DOMAIN → domain_indicator
+
+No transformation or inference is performed.
+
+Output: semantic object.
+
+---
+
+6.3 Compatibility Checker
+
+Purpose: Ensure internal consistency.
+
+Checks:
+
+• AREA and PROBLEM compatibility
+• REQUEST and DOMAIN compatibility
+• logical coherence
+• no mutually exclusive operations
+• no contradictory states
+
+Failure conditions:
+
+• incompatible area/problem
+• incompatible request/domain
+• contradiction detected
+
+Output: validated semantic object.
+
+---
+
+6.4 Payload Assembler
+
+Purpose: Construct the final Omricon payload.
+
+Payload fields:
+
+context_unit
+meaning_unit
+action_unit
+domain_indicator
+constraints
+ambiguity_flags
+contradiction_flags
+confidence (always 1.0)
+
+Payload must be deterministic and reproducible.
+
+---
+
+6.5 Cross‑Level Normalisation
+
+Purpose: Ensure compatibility across all O‑levels.
+
+Normalisation ensures:
+
+• O1 receives minimal units
+• O2 receives structured meaning/action/context
+• O3 receives domain routing data
+• O4 receives planning objectives
+• O‑Prime receives contradiction‑checking data
+• O‑Core receives kernel‑safe structures
+
+This is the defining feature of VORIN‑Ω.
+
+---
+
+7. Data Flow Description
+
+Input → Validator → Mapper → Checker → Assembler → Normaliser → Omricon Core
+
+Each stage produces a deterministic output consumed by the next stage.
+
+No stage performs inference.
+No stage modifies user intent.
+No stage reorders or rewrites content.
+
+---
+
+8. Error Handling
+
+All errors must be:
+
+• deterministic
+• reproducible
+• field‑specific
+• schema‑specific
+
+Error object fields:
+
+type
+reason
+field
+expected_format
+
+No ambiguous or generic errors are permitted.
+
+---
+
+9. Example Inputs
+
+Engineering Example
+
+AREA: fuse box
+PROBLEM: fuse blown
+REQUEST: how to change fuse
+DOMAIN: electrical
+
+Mathematics Example
+
+AREA: algebra
+PROBLEM: equation incomplete
+REQUEST: fix equation
+DOMAIN: mathematics
+
+Software Example
+
+AREA: mobile app
+PROBLEM: repeated crashes
+REQUEST: diagnose cause
+DOMAIN: software
+
+---
+
+10. Non‑Functional Requirements
+
+• deterministic output
+• zero inference
+• zero drift
+• O(1) memory per field
+• O(n) time complexity
+• cross‑module stability
+• reproducible behaviour
+
+---
+
+11. Implementation Notes
+
+• no NLP
+• no tokenisation
+• no POS tagging
+• no dependency parsing
+• no machine learning
+• no heuristics
+
+VORIN‑Ω is a schema validator, mapper and normaliser.
+
+---
+
+12. Versioning
+
+VORIN‑Ω is the Omricon‑wide version.
+Future versions must remain backward‑compatible with the four‑field schema.
+
+---
+
+13. Future Extensions
+
+Potential additions:
+
+• optional metadata fields
+• optional constraint fields
+• optional priority fields
+• optional multi‑domain routing
+
+These must not break the core schema.
+
+---
+
+14. Summary
+
+VORIN‑Ω is the unified interpretation layer for the entire Omricon architecture.
+The four‑box input system is the foundation for all reasoning, planning, routing and meta‑logic across every O‑level.
+
+This document defines the complete, engineer‑grade specification.
+
+---
+
