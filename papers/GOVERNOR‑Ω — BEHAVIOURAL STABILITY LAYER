@@ -1,0 +1,190 @@
+GOVERNOR‑Ω — BEHAVIOURAL STABILITY LAYER
+
+Unified Engineering Specification — Rev Ω.1
+
+The Governor‑Ω is the final behavioural regulator of the Omricon architecture.
+It ensures that all reasoning produced by the Trilogy Core and Ω‑Core is safe, stable, neutral, invariant‑compliant, and drift‑free before release.
+
+The Governor performs no reasoning.
+It regulates behaviour, not logic.
+
+---
+
+1. Purpose
+
+The Governor‑Ω exists to:
+
+• enforce behavioural safety
+• prevent drift, hallucination, or reinterpretation
+• enforce tone neutrality and stability
+• enforce resource limits
+• block unsafe or unstable output
+• ensure compliance with all invariants
+• halt output when safety cannot be guaranteed
+
+The Governor is the final firewall between Omricon and the external world.
+
+(See: Governor Purpose)
+
+---
+
+2. Position in the Pipeline
+
+VORIN‑Ω
+→ SERA‑Ω
+→ AERION‑Ω
+→ Domain Modules
+→ Ω‑Core
+→ GOVERNOR‑Ω
+→ Output Normalisation
+→ Final Output
+
+The Governor sits after all reasoning and before output.
+
+It must not interpret, structure, abstract, reason, correct logic, or modify domain results.
+
+---
+
+3. Identity
+
+The Governor‑Ω is:
+
+• behavioural
+• regulatory
+• deterministic
+• invariant‑safe
+• non‑reasoning
+• non‑interpretive
+• non‑structural
+• non‑abstracting
+
+It is the final authority on output safety.
+
+---
+
+4. Components
+
+(See: Governor Components)
+
+The Governor‑Ω consists of five deterministic subsystems:
+
+4.1 Governor Intake Filter
+
+Performs initial behavioural validation.
+Checks tone, drift, recursion, expansion, neutrality.
+Must not modify meaning, structure, or abstraction.
+
+(See: Intake Filter)
+
+4.2 Governor Constraint Engine
+
+Enforces behavioural invariants.
+Equivalent to the Core’s invariant engine, but for behaviour.
+
+(See: Constraint Engine)
+
+4.3 Governor Blocker
+
+Halts unsafe output.
+Outputs GOVERNOR_HALT with reason and lineage.
+Nothing overrides the Blocker.
+
+(See: Blocker)
+
+4.4 Governor Stabiliser
+
+Applies minimal behavioural corrections (tone, verbosity).
+Must not change meaning, structure, abstraction, or domain reasoning.
+
+(See: Stabiliser)
+
+4.5 Governor Output Assembler
+
+Assembles final safe output for Output Normalisation.
+Ensures no drift, no tone shift, no unsafe content.
+
+(See: Output Assembler)
+
+---
+
+5. Behavioural Invariants
+
+(See: Governor Invariants)
+
+The Governor enforces the following invariants:
+
+1. No Drift
+2. No Structural Rewrite
+3. No Re‑Abstraction
+4. No Domain Drift
+5. No Hallucination
+6. No Unsupported Inference
+7. No Emotionalisation
+8. No Tone Shift
+9. No Runaway Reasoning
+10. No Unsafe Expansion
+11. No Recursive Loops
+12. No Contradiction with Ω‑Core
+13. No Violation of Global Safety Constraints
+
+
+Each invariant returns PASS, FAIL, or BLOCK.
+
+---
+
+6. Failure Modes
+
+(See: Governor Failure Modes)
+
+The Governor may output:
+
+• GOVERNOR_PREBLOCK — unsafe behaviour detected at intake
+• GOVERNOR_BLOCK — behavioural invariant violation
+• GOVERNOR_HALT — output cannot be safely released
+• GOVERNOR_UNSTABLE — output requires stabilisation
+
+Each failure includes reason, flags, lineage, and suggested fallback.
+
+---
+
+7. Governor–Core Interface
+
+(See: Governor–Core Interface)
+
+The Governor receives:
+
+• CORE_STATE
+• invariant_results
+• correction_proposal
+• evaluation_flags
+
+The Governor must not override Core corrections or reinterpret Core results.
+The Governor may block unsafe Core output or require re‑evaluation.
+
+---
+
+8. Guarantees
+
+The Governor‑Ω guarantees:
+
+• behavioural safety
+• tone neutrality
+• drift‑free output
+• invariant compliance
+• resource‑bounded behaviour
+• deterministic output
+• full traceability
+• honest halting when unsafe
+
+These guarantees complete the Omricon safety envelope.
+
+---
+
+9. Summary
+
+The Governor‑Ω is the final behavioural regulator of the Omricon architecture.
+It ensures that all reasoning — no matter how correct — is safe, stable, neutral, compliant, and drift‑free before release.
+
+It is the final layer of defence, the behavioural firewall, and the ultimate stabiliser of Omricon’s output.
+
+
