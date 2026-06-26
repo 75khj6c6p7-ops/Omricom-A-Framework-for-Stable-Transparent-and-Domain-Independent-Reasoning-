@@ -1,0 +1,350 @@
+Ω‑CORE — UNIVERSAL REASONING KERNEL
+
+Engineering Specification — Rev Ω.1
+
+The Ω‑Core is the deterministic reasoning kernel of the Omricon architecture.
+It validates, corrects, or halts all reasoning produced by upstream components.
+The Core enforces universal invariants, ensures system stability, and guarantees deterministic behaviour across the entire pipeline.
+
+The Ω‑Core does not interpret, structure, abstract, or perform domain reasoning.
+Its function is strictly regulatory.
+
+---
+
+1. Core Identity
+
+The Ω‑Core consists of three deterministic subsystems:
+
+1. Invariant Engine
+2. Lens (Minimal Correction Engine)
+3. Evaluator (Reasoning Loop Controller)
+
+
+These subsystems operate as a unified reasoning kernel.
+
+---
+
+2. Core Purpose
+
+The Core enforces correctness and stability by:
+
+• applying the 13 universal invariants
+• validating every reasoning state
+• performing minimal safe corrections
+• halting when no valid reasoning path exists
+• ensuring deterministic, traceable behaviour
+
+The Core is the final authority on reasoning validity.
+
+---
+
+3. Core Boundaries
+
+The Ω‑Core must not:
+
+• reinterpret user intent (VORIN‑Ω)
+• restructure content (SERA‑Ω)
+• abstract content (AERION‑Ω)
+• perform domain reasoning
+• invent missing information
+• bypass invariant checks
+• continue after uncorrectable failure
+
+The Core regulates reasoning; it does not generate it.
+
+---
+
+4. Core Data Structures
+
+The Ω‑Core operates on deterministic internal objects.
+
+---
+
+4.1 CORE_STATE
+
+CORE_STATE
+• input_state
+• structure_state
+• abstraction_state
+• domain_state
+• invariant_results
+• correction_proposal
+• evaluation_flags
+• halt_reason
+• lineage (VORIN → SERA → AERION → Domain)
+
+The Core does not modify upstream content.
+
+---
+
+4.2 INVARIANT_RESULT
+
+INVARIANT_RESULT
+• invariant_name
+• status (PASS, FAIL, NEEDS_CORRECTION)
+• reason
+• location
+• severity
+
+---
+
+4.3 CORRECTION_PROPOSAL
+
+CORRECTION_PROPOSAL
+• minimal_change
+• justification
+• affected_units
+• expected_outcome
+• risk_flags
+
+If no safe correction exists → NO_VALID_PATH.
+
+---
+
+4.4 EVALUATION_FLAGS
+
+EVALUATION_FLAGS
+• stable
+• unstable
+• corrected
+• uncorrectable
+• governor_block
+• ready_for_output
+
+---
+
+5. Invariant Engine
+
+The Invariant Engine enforces the 13 universal invariants.
+Each invariant is a deterministic constraint function returning:
+
+• PASS
+• FAIL (with reason)
+• NEEDS_CORRECTION
+
+Invariants:
+
+1. Contradiction
+2. Paradox
+3. Recursion
+4. Drift
+5. Noise
+6. Structure
+7. Clarity
+8. Boundary
+9. Stability
+10. Context
+11. Compression
+12. Expansion
+13. Universal Evaluation
+
+
+These invariants define the global correctness constraints for all Omricon reasoning.
+
+---
+
+6. Lens — Minimal Correction Engine
+
+The Lens performs minimal deterministic correction.
+
+Responsibilities:
+
+• detect missing information
+• detect unsupported assumptions
+• detect boundary violations
+• propose minimal valid corrections
+• return NO_VALID_PATH when correction is unsafe
+
+The Lens must not rewrite meaning, restructure content, or infer missing data.
+
+---
+
+7. Evaluator — Reasoning Loop Controller
+
+The Evaluator executes the Core’s deterministic evaluation loop:
+
+1. Receive CORE_STATE
+2. Run invariants
+3. If all PASS → continue
+4. If any FAIL → call Lens
+5. If corrected → re‑evaluate
+6. If still invalid → halt with explicit failure
+
+
+This loop ensures:
+
+• no drift
+• no hallucination
+• no unsupported inference
+• no unstable reasoning
+
+---
+
+8. Core–Trilogy Interface Contract
+
+The Core defines strict upstream contracts.
+
+---
+
+8.1 VORIN‑Ω → Core
+
+VORIN must provide:
+
+• canonical intent
+• ambiguity flags
+• contradiction flags
+• domain hints
+• confidence = 1.0
+
+The Core must not reinterpret these fields.
+
+---
+
+8.2 SERA‑Ω → Core
+
+SERA must provide:
+
+• structure_type
+• structured_representation
+• structural_constraints
+• conflict_flags
+• ambiguity_flags
+
+The Core must not restructure or reorder content.
+
+---
+
+8.3 AERION‑Ω → Core
+
+AERION must provide:
+
+• abstract_representation
+• traceability_map
+• abstraction_conflict_flags
+• uncertainty_flags
+
+The Core must not compress or simplify content.
+
+---
+
+8.4 Domain Modules → Core
+
+Domain modules must provide:
+
+• deterministic domain_result
+• domain_conflict_flags
+• uncertainty_flags
+• traceability
+
+The Core must not perform domain reasoning.
+
+---
+
+9. Core Timing & Evaluation Guarantees
+
+9.1 Execution Points
+
+The Core runs:
+
+• after VORIN‑Ω
+• after SERA‑Ω
+• after AERION‑Ω
+• after Domain Modules
+• before Behavioural Governor
+• before Output Governor
+
+---
+
+9.2 Re‑Evaluation Triggers
+
+Re‑evaluation occurs when:
+
+• a correction is applied
+• a conflict is surfaced
+• a governor constraint is triggered
+• a domain module returns uncertainty
+
+---
+
+9.3 Halt Conditions
+
+The Core halts when:
+
+• invariants cannot be satisfied
+• Lens cannot correct safely
+• domain reasoning becomes impossible
+• structural or abstraction collapse occurs
+• governor enforces a hard stop
+
+---
+
+9.4 Non‑Bypassability
+
+No component may bypass the Core:
+
+• VORIN‑Ω
+• SERA‑Ω
+• AERION‑Ω
+• Domain Modules
+• Governors
+
+Every reasoning step must pass through the Core.
+
+---
+
+10. Core Failure Modes
+
+The Core may output:
+
+• INVALID_STATE — invariants violated
+• NO_VALID_PATH — Lens cannot correct
+• UNSUPPORTED_REASONING — domain or structure impossible
+• REASONING_HALT — governor‑enforced stop
+
+All failures must be deterministic, reproducible, and explicit.
+
+---
+
+11. Core Guarantees
+
+The Ω‑Core guarantees:
+
+• deterministic reasoning
+• invariant‑safe behaviour
+• governor‑safe behaviour
+• full traceability
+• honest failure when reasoning is impossible
+
+These guarantees define Omricon as a non‑hallucinatory reasoning engine.
+
+---
+
+12. Core Position in the Pipeline
+
+User Input
+→ Input Normalisation
+→ VORIN‑Ω
+→ SERA‑Ω
+→ AERION‑Ω
+→ Domain Modules
+→ Ω‑Core
+→ Behavioural Governor
+→ Output Governor
+→ Final Output
+
+---
+
+13. Summary
+
+The Ω‑Core is the deterministic reasoning kernel that ensures Omricon remains:
+
+• stable
+• consistent
+• invariant‑safe
+• drift‑free
+• hallucination‑free
+
+It is the regulatory centre of the entire architecture.
+
+---
+
